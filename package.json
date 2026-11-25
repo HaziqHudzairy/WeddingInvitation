@@ -1,0 +1,31 @@
+{
+  "name": "wedding-invitation",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Digital wedding invitations. Shared libraries live in packages/, every client invitation is its own site in projects/.",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "scripts": {
+    "dev": "node scripts/run.mjs dev",
+    "build": "node scripts/run.mjs build",
+    "preview": "node scripts/run.mjs preview",
+    "art": "node scripts/run.mjs art",
+    "typecheck": "node scripts/run.mjs typecheck",
+    "build:all": "npm run build --workspaces --if-present",
+    "new": "node scripts/new-project.mjs",
+    "rsvp:server": "node packages/rsvp/backend/node/server.mjs"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.3",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8"
+  },
+  "engines": {
+    "node": ">=20.19"
+  }
+}

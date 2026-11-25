@@ -1,0 +1,10 @@
+{
+  "name": "@wedding/art",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Procedural SVG illustration kit: parametric roses, leaves, fillers and gold ornaments. Pure functions returning SVG strings, palette driven, seeded for reproducible output.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.mjs"
+  }
+}

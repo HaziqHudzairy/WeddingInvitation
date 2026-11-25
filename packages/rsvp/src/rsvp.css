@@ -1,0 +1,482 @@
+/*
+ * @wedding/rsvp — default look.
+ * Every design re-skins it through these variables (set them on any ancestor):
+ *
+ *   --rsvp-font, --rsvp-label-font, --rsvp-ink, --rsvp-muted, --rsvp-accent,
+ *   --rsvp-accent-ink, --rsvp-accent-2, --rsvp-surface, --rsvp-surface-2,
+ *   --rsvp-border, --rsvp-radius, --rsvp-focus, --rsvp-error, --rsvp-shadow
+ */
+
+.rsvp,
+.rsvp-ticket,
+.rsvp-wishes {
+  --_font: var(--rsvp-font, inherit);
+  --_label-font: var(--rsvp-label-font, var(--_font));
+  --_ink: var(--rsvp-ink, #2f2a2c);
+  --_muted: var(--rsvp-muted, #7b7175);
+  --_accent: var(--rsvp-accent, #9b3550);
+  --_accent-ink: var(--rsvp-accent-ink, #fff);
+  --_accent-2: var(--rsvp-accent-2, #c9a35f);
+  --_surface: var(--rsvp-surface, #fff);
+  --_surface-2: var(--rsvp-surface-2, #faf6f4);
+  --_border: var(--rsvp-border, rgba(60, 40, 45, 0.18));
+  --_radius: var(--rsvp-radius, 14px);
+  --_focus: var(--rsvp-focus, rgba(155, 53, 80, 0.3));
+  --_error: var(--rsvp-error, #b3261e);
+  --_shadow: var(--rsvp-shadow, 0 10px 30px -18px rgba(40, 20, 25, 0.5));
+  font-family: var(--_font);
+  color: var(--_ink);
+}
+
+.rsvp {
+  display: grid;
+  gap: 1.35rem;
+  text-align: left;
+}
+.rsvp--closed {
+  text-align: center;
+  color: var(--_muted);
+}
+
+.rsvp-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.rsvp-field {
+  position: relative;
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.rsvp-fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.rsvp-label {
+  padding: 0;
+  font-family: var(--_label-font);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--_muted);
+}
+.rsvp-optional {
+  text-transform: none;
+  letter-spacing: 0;
+  opacity: 0.75;
+}
+
+.rsvp-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--_border);
+  border-radius: calc(var(--_radius) * 0.75);
+  background: var(--_surface);
+  color: var(--_ink);
+  font: inherit;
+  font-size: 1.05rem;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.rsvp-input::placeholder {
+  color: var(--_muted);
+  opacity: 0.7;
+}
+.rsvp-input:focus {
+  outline: none;
+  border-color: var(--_accent);
+  box-shadow: 0 0 0 4px var(--_focus);
+}
+.rsvp-input[aria-invalid='true'] {
+  border-color: var(--_error);
+}
+.rsvp-textarea {
+  min-height: 6.5rem;
+  resize: vertical;
+}
+.rsvp-count {
+  justify-self: end;
+  font-size: 0.75rem;
+  color: var(--_muted);
+}
+
+/* Attendance cards */
+.rsvp-choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.75rem;
+}
+.rsvp-choice {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--_border);
+  border-radius: var(--_radius);
+  background: var(--_surface);
+  cursor: pointer;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s, background 0.25s;
+}
+.rsvp-choice:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--_shadow);
+}
+.rsvp-choice:has(:focus-visible) {
+  box-shadow: 0 0 0 4px var(--_focus);
+}
+.rsvp-choice.is-selected {
+  border-color: var(--_accent);
+  background: var(--_surface-2);
+  box-shadow: inset 0 0 0 1px var(--_accent), var(--_shadow);
+}
+.rsvp-choice__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  border: 1px solid var(--_border);
+  color: var(--_muted);
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+.rsvp-choice.is-selected .rsvp-choice__icon {
+  background: var(--_accent);
+  border-color: var(--_accent);
+  color: var(--_accent-ink);
+}
+.rsvp-choice__text {
+  display: grid;
+  line-height: 1.2;
+}
+.rsvp-choice__text strong {
+  font-weight: 600;
+}
+.rsvp-choice__text small {
+  color: var(--_muted);
+  font-size: 0.85rem;
+}
+
+.rsvp-group {
+  display: grid;
+  gap: 1.35rem;
+  animation: rsvp-in 0.45s ease both;
+}
+@keyframes rsvp-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+/* Sessions */
+.rsvp-sessions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.75rem;
+}
+.rsvp-session {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--_border);
+  border-radius: var(--_radius);
+  background: var(--_surface);
+  cursor: pointer;
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+}
+.rsvp-session:has(:focus-visible) {
+  box-shadow: 0 0 0 4px var(--_focus);
+}
+.rsvp-session.is-selected {
+  border-color: var(--_accent);
+  background: var(--_surface-2);
+  box-shadow: inset 0 0 0 1px var(--_accent);
+}
+.rsvp-session.is-full {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.rsvp-session__label {
+  font-weight: 600;
+}
+.rsvp-session__time {
+  color: var(--_muted);
+  font-size: 0.9rem;
+}
+.rsvp-session__seats {
+  margin-top: 0.25rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--_accent);
+}
+
+/* Stepper */
+.rsvp-stepper {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: 0.25rem;
+  padding: 0.3rem;
+  border: 1px solid var(--_border);
+  border-radius: 999px;
+  background: var(--_surface);
+}
+.rsvp-stepper__btn {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 0;
+  border-radius: 50%;
+  background: var(--_surface-2);
+  color: var(--_ink);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.rsvp-stepper__btn:hover:not(:disabled) {
+  background: var(--_accent);
+  color: var(--_accent-ink);
+}
+.rsvp-stepper__btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.rsvp-stepper__btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--_focus);
+}
+.rsvp-stepper__value {
+  min-width: 2.5rem;
+  text-align: center;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+.rsvp-hint {
+  margin: 0;
+  color: var(--_muted);
+  font-size: 0.85rem;
+}
+
+.rsvp-check {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+}
+.rsvp-check input {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--_accent);
+}
+
+.rsvp-error {
+  margin: 0;
+  color: var(--_error);
+  font-size: 0.88rem;
+}
+.rsvp-alert {
+  margin: 0;
+  padding: 0.8rem 1rem;
+  border-radius: calc(var(--_radius) * 0.75);
+  background: color-mix(in srgb, var(--_error) 10%, transparent);
+  color: var(--_error);
+}
+
+.rsvp-submit {
+  justify-self: center;
+  min-width: 14rem;
+  padding: 1rem 2rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--_accent);
+  color: var(--_accent-ink);
+  font: inherit;
+  font-family: var(--_label-font);
+  font-size: 0.9rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: var(--_shadow);
+  transition: transform 0.25s, box-shadow 0.25s, opacity 0.25s;
+}
+.rsvp-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+.rsvp-submit:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--_focus), var(--_shadow);
+}
+.rsvp-submit:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+.rsvp-deadline {
+  margin: -0.4rem 0 0;
+  text-align: center;
+  color: var(--_muted);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* Ticket */
+.rsvp-ticket {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  border-radius: var(--_radius);
+  background: var(--_surface);
+  box-shadow: var(--_shadow);
+  text-align: left;
+  overflow: hidden;
+}
+.rsvp-ticket__main {
+  padding: 1.6rem 1.6rem 1.4rem;
+}
+.rsvp-ticket__eyebrow {
+  margin: 0 0 0.3rem;
+  font-family: var(--_label-font);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--_accent);
+}
+.rsvp-ticket__title {
+  margin: 0;
+  font-size: 1.6rem;
+}
+.rsvp-ticket__subtitle {
+  margin: 0.1rem 0 0;
+  color: var(--_muted);
+}
+.rsvp-ticket__body {
+  margin: 0.8rem 0 1rem;
+}
+.rsvp-ticket__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.6rem;
+  margin: 0;
+}
+.rsvp-ticket__meta dt {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--_muted);
+}
+.rsvp-ticket__meta dd {
+  margin: 0;
+  font-weight: 600;
+}
+.rsvp-ticket__stub {
+  position: relative;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 0.3rem;
+  min-width: 9.5rem;
+  padding: 1.4rem 1.2rem;
+  background: var(--_surface-2);
+  border-left: 2px dashed var(--_border);
+  text-align: center;
+}
+.rsvp-ticket__stub::before,
+.rsvp-ticket__stub::after {
+  content: '';
+  position: absolute;
+  left: -11px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--rsvp-cutout, #fff);
+}
+.rsvp-ticket__stub::before {
+  top: -10px;
+}
+.rsvp-ticket__stub::after {
+  bottom: -10px;
+}
+.rsvp-ticket__code-label {
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--_muted);
+}
+.rsvp-ticket__code {
+  font-family: var(--_label-font);
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  color: var(--_accent);
+  white-space: nowrap;
+}
+.rsvp-ticket__edit {
+  margin-top: 0.6rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--_border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--_ink);
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.rsvp-ticket__edit:hover {
+  border-color: var(--_accent);
+  color: var(--_accent);
+}
+@media (max-width: 520px) {
+  .rsvp-ticket {
+    grid-template-columns: 1fr;
+  }
+  .rsvp-ticket__stub {
+    border-left: 0;
+    border-top: 2px dashed var(--_border);
+  }
+  .rsvp-ticket__stub::before,
+  .rsvp-ticket__stub::after {
+    top: -11px;
+    left: auto;
+  }
+  .rsvp-ticket__stub::before {
+    left: -10px;
+  }
+  .rsvp-ticket__stub::after {
+    right: -10px;
+    bottom: auto;
+  }
+}
+
+/* Wishes */
+.rsvp-wishes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rsvp-wish {
+  padding: 1.1rem 1.2rem;
+  border-radius: var(--_radius);
+  background: var(--_surface);
+  box-shadow: var(--_shadow);
+}
+.rsvp-wish__message {
+  margin: 0 0 0.6rem;
+  font-style: italic;
+}
+.rsvp-wish__name {
+  margin: 0;
+  font-weight: 600;
+  color: var(--_accent);
+}

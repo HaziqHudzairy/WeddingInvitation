@@ -1,0 +1,20 @@
+{
+  "name": "@wedding/rsvp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Design-agnostic RSVP / seat reservation system: headless hook, themeable default UI, and pluggable backends (local, REST, Google Sheets).",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  }
+}

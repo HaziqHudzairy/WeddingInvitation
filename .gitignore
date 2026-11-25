@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.vite/
+*.log
+*.local
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+
+# local data written by the optional Node RSVP server
+packages/rsvp/backend/node/data/
